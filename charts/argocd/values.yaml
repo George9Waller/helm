@@ -3,5 +3,4 @@ argo-cd:
   server:
     extraArgs:
       - --insecure
-  spec:
     type: LoadBalancer
