@@ -3,5 +3,7 @@ argo-cd:
   server:
     service:
       type: LoadBalancer
+      port: 80
+      targetPort: 31650
     extraArgs:
       - --insecure
