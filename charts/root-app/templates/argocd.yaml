@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: {{ .Values.gitRepo.url }}
-    path: charts/argo-cd
+    path: charts/argo-cd/
     targetRevision: {{ .Values.gitRepo.targetRevision }}
   destination:
     server: {{ .Values.cluster.server }}
