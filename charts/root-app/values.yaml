@@ -1,0 +1,6 @@
+gitRepo:
+  url: https://github.com/George9Waller/helm.git
+  targetRevision: HEAD
+namespace: argocd
+cluster:
+  server: https://kubernetes.default.svc
