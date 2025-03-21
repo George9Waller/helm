@@ -4,11 +4,6 @@ metadata:
   name: root-app
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  labels:
-    app.kubernetes.io/managed-by: Helm
-  annotations:
-    meta.helm.sh/release-name: root-app
-    meta.helm.sh/release-namespace: {{ .Values.namespace }}
 spec:
   project: {{ .Values.namespace }}
   source:
