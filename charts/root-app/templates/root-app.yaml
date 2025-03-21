@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
   annotations:
     meta.helm.sh/release-name: root-app
-    meta.helm.sh/release-namespace: default
+    meta.helm.sh/release-namespace: argocd
 spec:
   project: default
   source:
@@ -17,7 +17,7 @@ spec:
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argocd
   syncPolicy:
     automated:
       selfHeal: true
