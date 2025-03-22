@@ -2,4 +2,3 @@ applications:
   - name: daily-planner
     repoURL: https://github.com/George9Waller/daily-planner.git
     path: helm
-    namespace: default
