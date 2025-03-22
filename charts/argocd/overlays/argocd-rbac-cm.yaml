@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+data:
+  policy.csv: |
+    p, role:admin, applications, get, */*, allow
+    p, role:admin, applications, create, */*, allow
+    p, role:admin, applications, delete, *, allow
+    p, role:admin, applications, sync, */*, allow
+    g, admin, role:admin
+  policy.default: role:readonly

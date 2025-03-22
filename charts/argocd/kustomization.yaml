@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+
+resources:
+- https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
+
+components:
+- https://github.com/argoproj-labs/argocd-extensions/manifests
+
+patches:
+- path: overlays/argocd-server-service.yaml
+- path: overlays/argocd-cmd-params-cm.yaml
+- path: overlays/argocd-rbac-cm.yaml
+
+images:
+- name: quay.io/argoproj/argocd
+  newName: ghcr.io/argoproj/argo-cd/argocd
+  newTag: 3.1.0
