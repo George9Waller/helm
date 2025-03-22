@@ -13,7 +13,7 @@ spec:
     targetRevision: {{ .targetRevision | default "HEAD" }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ .namespace | default "argocd" }}
+    namespace: {{ .namespace | default "default" }}
   syncPolicy:
     automated:
       prune: true
