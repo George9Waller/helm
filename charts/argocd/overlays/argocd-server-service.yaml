@@ -7,9 +7,9 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
-      nodeport: 32326
+      nodePort: 32326
     - port: 443
       targetPort: 8083
-      nodeport: 32327
+      nodePort: 32327
   selector:
     app.kubernetes.io/name: argocd-server
