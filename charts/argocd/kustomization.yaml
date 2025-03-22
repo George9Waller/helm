@@ -14,9 +14,3 @@ patches:
 - path: overlays/argocd-server-service.yaml
 - path: overlays/argocd-cmd-params-cm.yaml
 - path: overlays/argocd-rbac-cm.yaml
-
-# Change version here also
-images:
-- name: quay.io/argoproj/argocd
-  newName: ghcr.io/argoproj/argo-cd/argocd
-  newTag: 2.14.7
