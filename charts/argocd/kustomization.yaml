@@ -7,9 +7,6 @@ namespace: argocd
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.7/manifests/install.yaml
 
-components:
-- https://github.com/argoproj-labs/argocd-extensions/manifests
-
 patches:
 - path: overlays/argocd-server-service.yaml
 - path: overlays/argocd-cmd-params-cm.yaml
