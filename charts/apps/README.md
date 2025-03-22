@@ -16,6 +16,9 @@ kubectl create secret docker-registry ecr-registry-secret \
 # External secrets
 https://external-secrets.io/latest/introduction/getting-started/
 
+## Add repo to helm on cluster machine
+`helm repo add external-secrets https://charts.external-secrets.io`
+
 ## Create AWS secrets credentials secret
 ```
 echo -n 'KEYID' > ./access-key
