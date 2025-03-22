@@ -3,4 +3,12 @@ kind: Service
 metadata:
   name: argocd-server
 spec:
-  type: LoadBalancer
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodeport: 32326
+    - port: 443
+      targetPort: 8080
+      nodeport: 32327
+ß
