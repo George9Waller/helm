@@ -3,8 +3,9 @@ kind: Kustomization
 
 namespace: argocd
 
+# Change version here
 resources:
-- https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.7/manifests/install.yaml
 
 components:
 - https://github.com/argoproj-labs/argocd-extensions/manifests
@@ -14,7 +15,8 @@ patches:
 - path: overlays/argocd-cmd-params-cm.yaml
 - path: overlays/argocd-rbac-cm.yaml
 
+# Change version here also
 images:
 - name: quay.io/argoproj/argocd
   newName: ghcr.io/argoproj/argo-cd/argocd
-  newTag: 3.1.0
+  newTag: 2.14.7
