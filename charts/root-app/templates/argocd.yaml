@@ -4,7 +4,7 @@ metadata:
   name: argo-cd
   namespace: {{ .Values.namespace }}
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -17,3 +17,4 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+      prune: true
