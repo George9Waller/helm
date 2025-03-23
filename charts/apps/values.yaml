@@ -2,3 +2,8 @@ applications:
   - name: daily-planner
     repoURL: https://github.com/George9Waller/daily-planner.git
     path: helm
+
+
+aws:
+  region: ew-west-2
+  accountId: 810574566145
