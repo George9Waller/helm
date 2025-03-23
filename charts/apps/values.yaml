@@ -5,5 +5,5 @@ applications:
 
 
 aws:
-  region: ew-west-2
+  region: eu-west-2
   accountId: 810574566145
