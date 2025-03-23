@@ -6,4 +6,4 @@ applications:
 
 aws:
   region: eu-west-2
-  accountId: 810574566145
+  accountId: "810574566145"
