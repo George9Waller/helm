@@ -20,4 +20,5 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - SkipPrune=true
 {{- end }}
