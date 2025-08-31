@@ -3,6 +3,10 @@ applications:
     repoURL: https://github.com/George9Waller/daily-planner.git
     path: helm
 
+  - name: traefik-reverse-proxy
+    repoURL: https://github.com/George9Waller/traefik-reverse-proxy.git
+    path: helm
+
 
 aws:
   region: eu-west-2
