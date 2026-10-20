@@ -3,8 +3,12 @@ applications:
     repoURL: https://github.com/George9Waller/daily-planner.git
     path: helm
 
-  - name: traefik-reverse-proxy
-    repoURL: https://github.com/George9Waller/traefik-reverse-proxy.git
+  # - name: traefik-reverse-proxy
+  #   repoURL: https://github.com/George9Waller/traefik-reverse-proxy.git
+  #   path: helm
+
+  - name: audio-brain
+    repoURL: https://github.com/George9Waller/audio-brain.git
     path: helm
 
 
