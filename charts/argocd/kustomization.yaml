@@ -5,7 +5,7 @@ namespace: argocd
 
 # Change version here
 resources:
-- https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.7/manifests/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.6/manifests/install.yaml
 
 patches:
 - path: overlays/argocd-server-service.yaml

@@ -8,5 +8,6 @@ data:
     p, role:admin, applications, create, */*, allow
     p, role:admin, applications, delete, *, allow
     p, role:admin, applications, sync, */*, allow
+    p, role:admin, logs, get, */*, allow
     g, admin, role:admin
   policy.default: role:readonly
