@@ -1,0 +1,57 @@
+# Manual test for the `data-nvme` StorageClass (local-path on ubuntuserver2).
+#
+# NOT managed by Argo CD - this path is outside any Application's source, so it
+# will not be synced or pruned. Apply it by hand to verify provisioning:
+#
+#   kubectl apply -f examples/local-path-data/test-pvc-pod.yaml
+#   kubectl get pvc data-nvme-test
+#   kubectl logs data-nvme-test           # should print the date it wrote
+#   kubectl exec data-nvme-test -- cat /data/hello.txt
+#
+# Clean up (reclaimPolicy: Delete removes the backing dir on ubuntuserver2):
+#   kubectl delete -f examples/local-path-data/test-pvc-pod.yaml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-nvme-test
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: data-nvme
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: data-nvme-test
+  namespace: default
+spec:
+  # Required: pins the pod to ubuntuserver2, the only node with a path in
+  # nodePathMap. Without this the pod can land on ubuntuserver and the PVC
+  # stays Pending forever.
+  nodeSelector:
+    size: large
+  restartPolicy: Never
+  containers:
+    - name: writer
+      image: busybox:1.36
+      command:
+        - /bin/sh
+        - -c
+        - |
+          set -eu
+          echo "data-nvme test wrote at $(date)" > /data/hello.txt
+          cat /data/hello.txt
+          # keep the pod around briefly so the volume stays mounted for inspection
+          sleep 30
+      volumeMounts:
+        - name: test-vol
+          mountPath: /data
+  volumes:
+    - name: test-vol
+      persistentVolumeClaim:
+        claimName: data-nvme-test

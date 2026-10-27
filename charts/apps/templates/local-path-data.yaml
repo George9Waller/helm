@@ -1,0 +1,53 @@
+# Second local-path provisioner for the NVMe disk on ubuntuserver2.
+#
+# This is SEPARATE from the local-path provisioner k3s bundles in kube-system
+# (StorageClass `local-path`, provisioner `rancher.io/local-path`, the cluster
+# default). Everything here is uniquely named so the two never collide.
+#
+# Usage for a workload:
+#   1. PVC with `storageClassName: data-nvme`
+#   2. The consuming pod MUST set `nodeSelector: {size: large}` so it schedules
+#      on ubuntuserver2. nodePathMap lists ONLY ubuntuserver2, so a pod that
+#      lands on ubuntuserver (control plane) would have no path and the volume
+#      would stay Pending (volumeBindingMode: WaitForFirstConsumer).
+# See examples/local-path-data/ for a test PVC + pod.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: local-path-data
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rancher/local-path-provisioner.git
+    path: deploy/chart/local-path-provisioner
+    targetRevision: v0.0.36
+    helm:
+      values: |
+        # Unique names so nothing collides with the bundled provisioner.
+        fullnameOverride: local-path-data
+        storageClass:
+          create: true
+          name: data-nvme
+          defaultClass: false
+          reclaimPolicy: Delete
+          volumeBindingMode: WaitForFirstConsumer
+          provisionerName: rancher.io/local-path-data
+        configmap:
+          name: local-path-data-config
+        # Only ubuntuserver2 is listed, and there is no
+        # DEFAULT_PATH_FOR_NON_LISTED_NODES entry, so volumes can never be
+        # provisioned on ubuntuserver or on a root drive.
+        nodePathMap:
+          - node: ubuntuserver2
+            paths:
+              - /mnt/data/k3s-storage
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: local-path-data
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
